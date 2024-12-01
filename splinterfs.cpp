@@ -11,34 +11,70 @@
 #include <dirent.h>
 #include <stdlib.h>
 #include <filesystem>
-
+#include <cstdio>
+#include <cstdarg>
+#include <syslog.h>
+#include <format>
 
 #define SPLIT_SIZE 100048576 // 100MB split size
 #define MAX_SPLITS 1000    // Maximum number of splits
 
-// Add debug logging
-#define LOG_FILE "/home/tguinot/fuse_debug.log"
-#define DEBUG(fmt, ...)                                     \
-    do                                                      \
-    {                                                       \
-        FILE *f = fopen(LOG_FILE, "a");                     \
-        if (f)                                              \
-        {                                                   \
-            fprintf(f, "[DEBUG] " fmt "\n", ##__VA_ARGS__); \
-            fprintf(stdout, "[DEBUG] " fmt "\n", ##__VA_ARGS__); \
-            fclose(f);                                      \
-        }                                                   \
-    } while (0)
+
+using std::format;
+using std::format_string;
+
+class SysLogger {
+public:
+    SysLogger(int options = LOG_PID, int facility = LOG_USER) {
+        openlog("splinterfs", options, facility);
+    }
+
+    ~SysLogger() {
+        closelog();
+    }   
+
+    template<typename... Args>
+    void critical(format_string<Args...> fmt, Args&&... args) {
+        log(LOG_CRIT, format(fmt, std::forward<Args>(args)...));
+    }
+
+    template<typename... Args>
+    void error(format_string<Args...> fmt, Args&&... args) {
+        log(LOG_ERR, format(fmt, std::forward<Args>(args)...));
+    }
+
+    template<typename... Args>
+    void warning(format_string<Args...> fmt, Args&&... args) {
+        log(LOG_WARNING, format(fmt, std::forward<Args>(args)...));
+    }
+
+    template<typename... Args>
+    void info(format_string<Args...> fmt, Args&&... args) {
+        log(LOG_INFO, format(fmt, std::forward<Args>(args)...));
+    }
+
+    template<typename... Args>
+    void debug(format_string<Args...> fmt, Args&&... args) {
+        log(LOG_DEBUG, format(fmt, std::forward<Args>(args)...));
+    }
+
+private:
+    void log(int priority, const std::string& message) {
+        syslog(priority, "%s", message.c_str());
+    }
+};
 
 static char *source_path;
 static char *mountpoint;
 
+SysLogger logger;
+
 static int get_attr(const char *path, struct stat *stbuf) {
-    DEBUG("get_attr called with path: %s", path);
+    logger.debug("get_attr called with path: {}", path);
 
     memset(stbuf, 0, sizeof(struct stat));
     if (strcmp(path, "/") == 0) {
-        DEBUG("Root directory attributes requested");
+        logger.debug("Root directory attributes requested");
         stbuf->st_mode = S_IFDIR | 0755;
         stbuf->st_nlink = 2;
         return 0;
@@ -47,32 +83,32 @@ static int get_attr(const char *path, struct stat *stbuf) {
     char filename[256];
     int split_num;
     if (sscanf(path, "/%d_%[^\n]", &split_num, filename) == 2) {
-        DEBUG("Split file attributes requested for %d_%s",split_num, filename);
+        logger.debug("Split file attributes requested for {}_{}",split_num, filename);
         struct stat st;
         if (stat(source_path, &st) == -1) {
-            DEBUG("stat failed for source path: %s, errno: %d", source_path, errno);
+            logger.debug("stat failed for source path: {}, errno: {}", source_path, errno);
             return -errno;
         }
 
         stbuf->st_mode = S_IFREG | 0444;
         stbuf->st_nlink = 1;
         stbuf->st_size = (st.st_size > (split_num + 1) * SPLIT_SIZE) ? SPLIT_SIZE : (st.st_size - split_num * SPLIT_SIZE);
-        DEBUG("Returning file size: %ld", (long)stbuf->st_size);
+        logger.debug("Returning file size: %ld", (long)stbuf->st_size);
         return 0;
     }
 
-    DEBUG("File not found: %s", path);
+    logger.debug("File not found: {}", path);
     return -ENOENT;
 }
 
 static int read_dir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi) {
-    DEBUG("read_dir called with path: %s", path);
+    logger.debug("read_dir called with path: {}", path);
 
     (void)offset;
     (void)fi;
 
     if (strcmp(path, "/") != 0) {
-        DEBUG("Invalid directory path: %s", path);
+        logger.debug("Invalid directory path: {}", path);
         return -ENOENT;
     }
 
@@ -81,7 +117,7 @@ static int read_dir(const char *path, void *buf, fuse_fill_dir_t filler, off_t o
 
     struct stat st;
     if (stat(source_path, &st) == -1) {
-        DEBUG("stat failed for source path: %s, errno: %d", source_path, errno);
+        logger.debug("stat failed for source path: {}, errno: {}", source_path, errno);
         return -errno;
     }
 
@@ -90,11 +126,11 @@ static int read_dir(const char *path, void *buf, fuse_fill_dir_t filler, off_t o
     char *base_name = strrchr(source_path, '/');
     base_name = base_name ? base_name + 1 : (char *)source_path;
 
-    DEBUG("Creating %d splits for file size %ld", num_splits, (long)st.st_size);
+    logger.debug("Creating {} splits for file size %ld", num_splits, (long)st.st_size);
 
     for (int i = 0; i < num_splits && i < MAX_SPLITS; i++) {
         snprintf(split_name, sizeof(split_name), "%d_%s", i, base_name);
-        DEBUG("Adding split file: %s", split_name);
+        logger.debug("Adding split file: {}", split_name);
         filler(buf, split_name, NULL, 0);
     }
 
@@ -102,26 +138,26 @@ static int read_dir(const char *path, void *buf, fuse_fill_dir_t filler, off_t o
 }
 
 static int open_file(const char *path, struct fuse_file_info *fi) {
-    DEBUG("open_file called with path: %s", path);
+   logger. debug("open_file called with path: {}", path);
 
     char filename[256];
     int split_num;
     if (sscanf(path, "/%d_%[^\n]", &split_num, filename) != 2) {
-        DEBUG("Failed to parse split file path: %s", path);
+        logger.debug("Failed to parse split file path: {}", path);
         return -ENOENT;
     }
 
     if ((fi->flags & O_ACCMODE) != O_RDONLY) {
-        DEBUG("Attempted write access, denied");
+        logger.debug("Attempted write access, denied");
         return -EACCES;
     }
 
-    DEBUG("File opened successfully");
+    logger.debug("File opened successfully");
     return 0;
 }
 
 static int read_file(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-    DEBUG("read_file called with path: %s, size: %zu, offset: %ld for source %s",
+    logger.debug("read_file called with path: {}, size: %zu, offset: %ld for source {}",
           path, size, (long)offset, source_path);
 
     (void)fi;
@@ -129,31 +165,31 @@ static int read_file(const char *path, char *buf, size_t size, off_t offset, str
     int split_num;
 
     if (sscanf(path, "/%d_%[^\n]", &split_num, filename) != 2) {
-        DEBUG("Failed to parse split file path: %s", path);
+        logger.debug("Failed to parse split file path: {}", path);
         return -ENOENT;
     }
 
     int fd = open(source_path, O_RDONLY);
     if (fd == -1){
-        DEBUG("Failed to open source file: %s, errno: %d", source_path, errno);
+        logger.debug("Failed to open source file: {}, errno: {}", source_path, errno);
         return -errno;
     }
 
     off_t file_offset = split_num * SPLIT_SIZE + offset;
-    DEBUG("lseeking with file_offset: %ld using split_num %d", file_offset, split_num);
+    logger.debug("lseeking with file_offset: %ld using split_num {}", file_offset, split_num);
     if (lseek(fd, file_offset, SEEK_SET) == -1){
-        DEBUG("lseek failed, offset: %ld, errno: %d", (long)file_offset, errno);
+        logger.debug("lseek failed, offset: %ld, errno: {}", (long)file_offset, errno);
         close(fd);
         return -errno;
     }
 
     int res = read(fd, buf, size);
     if (res == -1){
-        DEBUG("read failed, errno: %d", errno);
+        logger.debug("read failed, errno: {}", errno);
         res = -errno;
     }
     else {
-        DEBUG("Successfully read %d bytes", res);
+        logger.debug("Successfully read {} bytes", res);
     }
 
     close(fd);
@@ -179,16 +215,16 @@ int main(int argc, char *argv[]) {
     // Create mountpoint directory if it doesn't exist
     std::filesystem::create_directory(std::string(mountpoint));
 
-    DEBUG("------------");
-    DEBUG("Starting FUSE filesystem");
-    DEBUG("Source path: %s", source_path);
-    DEBUG("Mount point: %s", mountpoint);
+    logger.debug("------------");
+    logger.debug("Starting FUSE filesystem");
+    logger.debug("Source path: {}", source_path);
+    logger.debug("Mount point: {}", mountpoint);
 
     // Pass all arguments directly to fuse_main, just skip the source_file argument
     argv[1] = argv[2];  // Move mountpoint to position 1
     int ret = fuse_main(argc - 1, &argv[0], &split_file_oper, NULL);
 
-    DEBUG("Finished, good bye");
+    logger.debug("Finished, good bye");
     fflush(stdout);
     return ret;
 }
