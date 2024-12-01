@@ -1,7 +1,8 @@
 #include "logger.h"
+#include "config.h"
 
 SysLogger::SysLogger(int options, int facility) {
-    openlog("splinterfs", options, facility);
+    openlog(SYSLOGID, options, facility);
 }
 
 SysLogger::~SysLogger() {

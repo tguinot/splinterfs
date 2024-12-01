@@ -14,9 +14,7 @@
 #include <cstdio>
 #include <cstdarg>
 #include "logger.h"
-
-#define SPLIT_SIZE 100048576 // 100MB split size
-#define MAX_SPLITS 1000    // Maximum number of splits
+#include "config.h"
 
 static char *source_path;
 static char *mountpoint;
@@ -178,7 +176,5 @@ int main(int argc, char *argv[]) {
     argv[1] = argv[2];  // Move mountpoint to position 1
     int ret = fuse_main(argc - 1, &argv[0], &split_file_oper, NULL);
 
-    logger.debug("Finished, good bye");
-    fflush(stdout);
     return ret;
 }
