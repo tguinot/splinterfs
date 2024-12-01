@@ -19,7 +19,7 @@ Dead simple FUSE filesystem that splits large files into fixed-size chunks for e
 ./splinterfs big_file.mp4 /mnt/chunks
 ```
 
-Your 10GB video will show up as:
+Your 40GB video will show up as:
 ```
 /mnt/chunks/0_big_file.mp4
 /mnt/chunks/1_big_file.mp4
@@ -30,13 +30,22 @@ Your 10GB video will show up as:
 Each chunk appears as a read-only slice of the original file. Zero extra disk space needed - it's all virtual mapping.
 
 ## Build
-```bash
-g++-13 -std=c++20 splinterfs.cpp logger.cpp -o splinterfs `pkg-config fuse --cflags --libs`
-```
 
 Needs FUSE dev libs. On Ubuntu/Debian:
 ```bash
 sudo apt-get install libfuse-dev
+```
+
+To build:
+```bash
+git clone https://github.com/tguinot/splinterfs.git
+
+cd splinterfs
+mkdir build
+cd build
+
+cmake ..
+make
 ```
 
 Read-only, no fancy stuff. Just works™
