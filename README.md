@@ -36,6 +36,8 @@ Needs FUSE dev libs. On Ubuntu/Debian:
 sudo apt-get install libfuse-dev
 ```
 
+Requires `g++` 13 or above.
+
 To build:
 ```bash
 git clone https://github.com/tguinot/splinterfs.git
