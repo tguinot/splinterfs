@@ -13,56 +13,10 @@
 #include <filesystem>
 #include <cstdio>
 #include <cstdarg>
-#include <syslog.h>
-#include <format>
+#include "logger.h"
 
 #define SPLIT_SIZE 100048576 // 100MB split size
 #define MAX_SPLITS 1000    // Maximum number of splits
-
-
-using std::format;
-using std::format_string;
-
-class SysLogger {
-public:
-    SysLogger(int options = LOG_PID, int facility = LOG_USER) {
-        openlog("splinterfs", options, facility);
-    }
-
-    ~SysLogger() {
-        closelog();
-    }   
-
-    template<typename... Args>
-    void critical(format_string<Args...> fmt, Args&&... args) {
-        log(LOG_CRIT, format(fmt, std::forward<Args>(args)...));
-    }
-
-    template<typename... Args>
-    void error(format_string<Args...> fmt, Args&&... args) {
-        log(LOG_ERR, format(fmt, std::forward<Args>(args)...));
-    }
-
-    template<typename... Args>
-    void warning(format_string<Args...> fmt, Args&&... args) {
-        log(LOG_WARNING, format(fmt, std::forward<Args>(args)...));
-    }
-
-    template<typename... Args>
-    void info(format_string<Args...> fmt, Args&&... args) {
-        log(LOG_INFO, format(fmt, std::forward<Args>(args)...));
-    }
-
-    template<typename... Args>
-    void debug(format_string<Args...> fmt, Args&&... args) {
-        log(LOG_DEBUG, format(fmt, std::forward<Args>(args)...));
-    }
-
-private:
-    void log(int priority, const std::string& message) {
-        syslog(priority, "%s", message.c_str());
-    }
-};
 
 static char *source_path;
 static char *mountpoint;
