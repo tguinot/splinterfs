@@ -27,7 +27,7 @@ Your 10GB video will show up as:
 /mnt/chunks/99_big_file.mp4
 ```
 
-Each chunk appears as a read-only 100MB slice of the original file. Zero extra disk space needed - it's all virtual mapping.
+Each chunk appears as a read-only slice of the original file. Zero extra disk space needed - it's all virtual mapping.
 
 ## Build
 ```bash
