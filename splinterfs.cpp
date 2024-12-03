@@ -34,7 +34,7 @@ static int get_attr(const char *path, struct stat *stbuf) {
 
     char filename[256];
     int split_num;
-    if (sscanf(path, "/%d_%[^\n]", &split_num, filename) == 2) {
+    if (sscanf(path, SCANPATTERN, &split_num, filename) == 2) {
         logger.debug("Split file attributes requested for {}_{}",split_num, filename);
         struct stat st;
         if (stat(source_path, &st) == -1) {
@@ -90,11 +90,11 @@ static int read_dir(const char *path, void *buf, fuse_fill_dir_t filler, off_t o
 }
 
 static int open_file(const char *path, struct fuse_file_info *fi) {
-   logger. debug("open_file called with path: {}", path);
+    logger.debug("open_file called with path: {}", path);
 
     char filename[256];
     int split_num;
-    if (sscanf(path, "/%d_%[^\n]", &split_num, filename) != 2) {
+    if (sscanf(path, SCANPATTERN, &split_num, filename) != 2) {
         logger.debug("Failed to parse split file path: {}", path);
         return -ENOENT;
     }
@@ -116,7 +116,7 @@ static int read_file(const char *path, char *buf, size_t size, off_t offset, str
     char filename[256];
     int split_num;
 
-    if (sscanf(path, "/%d_%[^\n]", &split_num, filename) != 2) {
+    if (sscanf(path, SCANPATTERN, &split_num, filename) != 2) {
         logger.debug("Failed to parse split file path: {}", path);
         return -ENOENT;
     }
