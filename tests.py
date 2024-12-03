@@ -15,7 +15,7 @@ SOURCE_FILE = "xxxxxx"
 class FuseFilesystemTest(unittest.TestCase):
     FUSE_PROGRAM = './build/splinterfs'  
     MOUNTPOINT = '/tmp/' + ''.join(random.choices(string.ascii_letters, k=8))
-    SPLIT_SIZE = 100048576   # Example: 1 MB
+    SPLIT_SIZE = 100048576
     SOURCE_FILE = SOURCE_FILE
     BASE_NAME = os.path.basename(SOURCE_FILE)
     FUSE_PID = None
@@ -57,13 +57,11 @@ class FuseFilesystemTest(unittest.TestCase):
         # List root directory contents
         files = os.listdir(self.MOUNTPOINT)
 
-        # Calculate expected number of splits
         source_size = os.stat(self.SOURCE_FILE).st_size
         expected_splits = (source_size + self.SPLIT_SIZE - 1) // self.SPLIT_SIZE
 
         self.assertEqual(len(files), expected_splits, f"Expected {expected_splits} splits, found {len(files)}.")
 
-        # Check filenames
         expected_files = [f"{i}_{self.BASE_NAME}" for i in range(expected_splits)]
         self.assertListEqual(sorted(files), sorted(expected_files), "Split file names do not match expected pattern.")
 
@@ -76,11 +74,10 @@ class FuseFilesystemTest(unittest.TestCase):
             file_path = os.path.join(self.MOUNTPOINT, file)
             st = os.stat(file_path)
 
-            # Check permissions (should be 0444)
+            # Check permissions
             perms = oct(st.st_mode & 0o777)
             self.assertEqual(perms, '0o444', f"Incorrect permissions on {file} (found {perms}).")
 
-            # Check file size
             if i < expected_splits - 1:
                 expected_size = self.SPLIT_SIZE
             else:
@@ -136,7 +133,7 @@ class FuseFilesystemDynamicTest(unittest.TestCase):
     FUSE_PROGRAM = './build/splinterfs'
     SOURCE_FILE = SOURCE_FILE
     MOUNTPOINT = '/tmp/' + ''.join(random.choices(string.ascii_letters, k=8))
-    SPLIT_SIZE = 100048576   # Example: 1 MB
+    SPLIT_SIZE = 100048576
 
     def setUp(self):
         # Create mountpoint directory
@@ -180,11 +177,9 @@ class FuseFilesystemDynamicTest(unittest.TestCase):
                     with open(os.path.join(self.MOUNTPOINT, file), 'rb') as infile:
                         outfile.write(infile.read())
 
-            # Calculate the hash of the combined splits
             with open(combined_splits_path, 'rb') as f:
                 combined_splits_hash = hashlib.sha256(f.read()).hexdigest()
 
-            # Calculate the hash of the modified temporary file
             with open(temp_source_file_path, 'rb') as f:
                 temp_source_file_hash = hashlib.sha256(f.read()).hexdigest()
 
