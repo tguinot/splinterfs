@@ -1,0 +1,170 @@
+\hypertarget{classtests_1_1FuseFilesystemTest}{}\doxysection{tests.\+Fuse\+Filesystem\+Test Class Reference}
+\label{classtests_1_1FuseFilesystemTest}\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+
+
+Inheritance diagram for tests.\+Fuse\+Filesystem\+Test\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classtests_1_1FuseFilesystemTest__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tests.\+Fuse\+Filesystem\+Test\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{classtests_1_1FuseFilesystemTest__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_abd0bcb7aef4455f1b908e74188ec4ae2}{set\+Up\+Class}} (cls)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a322558a0d1580bff4994b88be5709fd9}{tear\+Down\+Class}} (cls)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a284f863ad2c5a91e6cbaf75b47180e33}{test\+\_\+1\+\_\+mounting}} (self)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a051497a00f819b7bb0eff5bae6f674f4}{test\+\_\+2\+\_\+directory\+\_\+listing}} (self)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_accd98f9c090766118d2723a4bddcdc67}{test\+\_\+3\+\_\+file\+\_\+attributes}} (self)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_ad7eb3fcbeb15482d02f60ebbf4b0b356}{test\+\_\+4\+\_\+reading\+\_\+split\+\_\+files}} (self)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a5fb4b029ce58e8649dcb1f75b5541946}{test\+\_\+5\+\_\+read\+\_\+beyond\+\_\+eof}} (self)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_aa9b8cfe1c3c4adae795f8a61826e62a9}{test\+\_\+6\+\_\+write\+\_\+access\+\_\+denied}} (self)
+\item 
+def \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a69f37c74d3120816cefa8e1760e5f38c}{test\+\_\+7\+\_\+access\+\_\+non\+\_\+existent\+\_\+file}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtests_1_1FuseFilesystemTest_ab794af19399308c70f82db6541482bac}{fuse\+\_\+process}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a24cf2e0cea86cff98655262d2544e676}{FUSE\+\_\+\+PROGRAM}} = \textquotesingle{}../build/splinterfs\textquotesingle{}
+\item 
+string \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_aa6c9bc40cab39903c4936cce420b78bb}{MOUNTPOINT}} = \textquotesingle{}/tmp/\textquotesingle{} + \textquotesingle{}\textquotesingle{}.join(random.\+choices(string.\+ascii\+\_\+letters, k=8))
+\item 
+int \mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a2c357d080dc6db07cb11b11464fb4557}{SPLIT\+\_\+\+SIZE}} = 100048576
+\item 
+\mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a4cb963dfaef16a6d6275e77972264205}{SOURCE\+\_\+\+FILE}} = SOURCE\+\_\+\+FILE
+\item 
+\mbox{\hyperlink{classtests_1_1FuseFilesystemTest_aa99d4845b1e63b7ed5428a57fc5b03c9}{BASE\+\_\+\+NAME}} = os.\+path.\+basename(\mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a4cb963dfaef16a6d6275e77972264205}{SOURCE\+\_\+\+FILE}})
+\item 
+\mbox{\hyperlink{classtests_1_1FuseFilesystemTest_ae29fd97fdb48fe8f72381ad573429bef}{FUSE\+\_\+\+PID}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_abd0bcb7aef4455f1b908e74188ec4ae2}\label{classtests_1_1FuseFilesystemTest_abd0bcb7aef4455f1b908e74188ec4ae2}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!setUpClass@{setUpClass}}
+\index{setUpClass@{setUpClass}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{setUpClass()}{setUpClass()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+set\+Up\+Class (\begin{DoxyParamCaption}\item[{}]{cls }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a322558a0d1580bff4994b88be5709fd9}\label{classtests_1_1FuseFilesystemTest_a322558a0d1580bff4994b88be5709fd9}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!tearDownClass@{tearDownClass}}
+\index{tearDownClass@{tearDownClass}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{tearDownClass()}{tearDownClass()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+tear\+Down\+Class (\begin{DoxyParamCaption}\item[{}]{cls }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a284f863ad2c5a91e6cbaf75b47180e33}\label{classtests_1_1FuseFilesystemTest_a284f863ad2c5a91e6cbaf75b47180e33}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_1\_mounting@{test\_1\_mounting}}
+\index{test\_1\_mounting@{test\_1\_mounting}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_1\_mounting()}{test\_1\_mounting()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+1\+\_\+mounting (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a051497a00f819b7bb0eff5bae6f674f4}\label{classtests_1_1FuseFilesystemTest_a051497a00f819b7bb0eff5bae6f674f4}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_2\_directory\_listing@{test\_2\_directory\_listing}}
+\index{test\_2\_directory\_listing@{test\_2\_directory\_listing}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_2\_directory\_listing()}{test\_2\_directory\_listing()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+2\+\_\+directory\+\_\+listing (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_accd98f9c090766118d2723a4bddcdc67}\label{classtests_1_1FuseFilesystemTest_accd98f9c090766118d2723a4bddcdc67}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_3\_file\_attributes@{test\_3\_file\_attributes}}
+\index{test\_3\_file\_attributes@{test\_3\_file\_attributes}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_3\_file\_attributes()}{test\_3\_file\_attributes()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+3\+\_\+file\+\_\+attributes (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_ad7eb3fcbeb15482d02f60ebbf4b0b356}\label{classtests_1_1FuseFilesystemTest_ad7eb3fcbeb15482d02f60ebbf4b0b356}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_4\_reading\_split\_files@{test\_4\_reading\_split\_files}}
+\index{test\_4\_reading\_split\_files@{test\_4\_reading\_split\_files}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_4\_reading\_split\_files()}{test\_4\_reading\_split\_files()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+4\+\_\+reading\+\_\+split\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a5fb4b029ce58e8649dcb1f75b5541946}\label{classtests_1_1FuseFilesystemTest_a5fb4b029ce58e8649dcb1f75b5541946}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_5\_read\_beyond\_eof@{test\_5\_read\_beyond\_eof}}
+\index{test\_5\_read\_beyond\_eof@{test\_5\_read\_beyond\_eof}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_5\_read\_beyond\_eof()}{test\_5\_read\_beyond\_eof()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+5\+\_\+read\+\_\+beyond\+\_\+eof (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_aa9b8cfe1c3c4adae795f8a61826e62a9}\label{classtests_1_1FuseFilesystemTest_aa9b8cfe1c3c4adae795f8a61826e62a9}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_6\_write\_access\_denied@{test\_6\_write\_access\_denied}}
+\index{test\_6\_write\_access\_denied@{test\_6\_write\_access\_denied}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_6\_write\_access\_denied()}{test\_6\_write\_access\_denied()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+6\+\_\+write\+\_\+access\+\_\+denied (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a69f37c74d3120816cefa8e1760e5f38c}\label{classtests_1_1FuseFilesystemTest_a69f37c74d3120816cefa8e1760e5f38c}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!test\_7\_access\_non\_existent\_file@{test\_7\_access\_non\_existent\_file}}
+\index{test\_7\_access\_non\_existent\_file@{test\_7\_access\_non\_existent\_file}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{test\_7\_access\_non\_existent\_file()}{test\_7\_access\_non\_existent\_file()}}
+{\footnotesize\ttfamily def tests.\+Fuse\+Filesystem\+Test.\+test\+\_\+7\+\_\+access\+\_\+non\+\_\+existent\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_aa99d4845b1e63b7ed5428a57fc5b03c9}\label{classtests_1_1FuseFilesystemTest_aa99d4845b1e63b7ed5428a57fc5b03c9}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!BASE\_NAME@{BASE\_NAME}}
+\index{BASE\_NAME@{BASE\_NAME}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{BASE\_NAME}{BASE\_NAME}}
+{\footnotesize\ttfamily tests.\+Fuse\+Filesystem\+Test.\+BASE\+\_\+\+NAME = os.\+path.\+basename(\mbox{\hyperlink{classtests_1_1FuseFilesystemTest_a4cb963dfaef16a6d6275e77972264205}{SOURCE\+\_\+\+FILE}})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_ae29fd97fdb48fe8f72381ad573429bef}\label{classtests_1_1FuseFilesystemTest_ae29fd97fdb48fe8f72381ad573429bef}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!FUSE\_PID@{FUSE\_PID}}
+\index{FUSE\_PID@{FUSE\_PID}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{FUSE\_PID}{FUSE\_PID}}
+{\footnotesize\ttfamily tests.\+Fuse\+Filesystem\+Test.\+FUSE\+\_\+\+PID = None\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_ab794af19399308c70f82db6541482bac}\label{classtests_1_1FuseFilesystemTest_ab794af19399308c70f82db6541482bac}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!fuse\_process@{fuse\_process}}
+\index{fuse\_process@{fuse\_process}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{fuse\_process}{fuse\_process}}
+{\footnotesize\ttfamily tests.\+Fuse\+Filesystem\+Test.\+fuse\+\_\+process}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a24cf2e0cea86cff98655262d2544e676}\label{classtests_1_1FuseFilesystemTest_a24cf2e0cea86cff98655262d2544e676}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!FUSE\_PROGRAM@{FUSE\_PROGRAM}}
+\index{FUSE\_PROGRAM@{FUSE\_PROGRAM}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{FUSE\_PROGRAM}{FUSE\_PROGRAM}}
+{\footnotesize\ttfamily string tests.\+Fuse\+Filesystem\+Test.\+FUSE\+\_\+\+PROGRAM = \textquotesingle{}../build/splinterfs\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_aa6c9bc40cab39903c4936cce420b78bb}\label{classtests_1_1FuseFilesystemTest_aa6c9bc40cab39903c4936cce420b78bb}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!MOUNTPOINT@{MOUNTPOINT}}
+\index{MOUNTPOINT@{MOUNTPOINT}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{MOUNTPOINT}{MOUNTPOINT}}
+{\footnotesize\ttfamily string tests.\+Fuse\+Filesystem\+Test.\+MOUNTPOINT = \textquotesingle{}/tmp/\textquotesingle{} + \textquotesingle{}\textquotesingle{}.join(random.\+choices(string.\+ascii\+\_\+letters, k=8))\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a4cb963dfaef16a6d6275e77972264205}\label{classtests_1_1FuseFilesystemTest_a4cb963dfaef16a6d6275e77972264205}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!SOURCE\_FILE@{SOURCE\_FILE}}
+\index{SOURCE\_FILE@{SOURCE\_FILE}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{SOURCE\_FILE}{SOURCE\_FILE}}
+{\footnotesize\ttfamily tests.\+Fuse\+Filesystem\+Test.\+SOURCE\+\_\+\+FILE = SOURCE\+\_\+\+FILE\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classtests_1_1FuseFilesystemTest_a2c357d080dc6db07cb11b11464fb4557}\label{classtests_1_1FuseFilesystemTest_a2c357d080dc6db07cb11b11464fb4557}} 
+\index{tests.FuseFilesystemTest@{tests.FuseFilesystemTest}!SPLIT\_SIZE@{SPLIT\_SIZE}}
+\index{SPLIT\_SIZE@{SPLIT\_SIZE}!tests.FuseFilesystemTest@{tests.FuseFilesystemTest}}
+\doxysubsubsection{\texorpdfstring{SPLIT\_SIZE}{SPLIT\_SIZE}}
+{\footnotesize\ttfamily int tests.\+Fuse\+Filesystem\+Test.\+SPLIT\+\_\+\+SIZE = 100048576\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+tests/\mbox{\hyperlink{tests_8py}{tests.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{classSysLogger}{}\doxysection{Sys\+Logger Class Reference}
+\label{classSysLogger}\index{SysLogger@{SysLogger}}
+
+
+{\ttfamily \#include $<$logger.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSysLogger_acd17bde8da5f0652e5f31341ce1f5b85}{Sys\+Logger}} (int options=LOG\+\_\+\+PID, int facility=LOG\+\_\+\+USER)
+\item 
+\mbox{\hyperlink{classSysLogger_af0121ecb4f50cf05cf240bf5bb077333}{$\sim$\+Sys\+Logger}} ()
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classSysLogger_a4546a14712282926bc4dc6d6a45c3d91}{critical}} (format\+\_\+string$<$ Args... $>$ fmt, Args \&\&... args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classSysLogger_a6f0467d292b9f262504c6bd119d8a87e}{error}} (format\+\_\+string$<$ Args... $>$ fmt, Args \&\&... args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classSysLogger_a2dabf214f7b54c3016637f59b2b0f509}{warning}} (format\+\_\+string$<$ Args... $>$ fmt, Args \&\&... args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classSysLogger_a93e920221bbb6a6eaf9ee99a3b7aeea7}{info}} (format\+\_\+string$<$ Args... $>$ fmt, Args \&\&... args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classSysLogger_a905bd3f762e443674881fd6a93ee6ac3}{debug}} (format\+\_\+string$<$ Args... $>$ fmt, Args \&\&... args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSysLogger_a69c6b19d0dac53bbcec9696386457749}{log}} (int priority, const std\+::string \&message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSysLogger_acd17bde8da5f0652e5f31341ce1f5b85}\label{classSysLogger_acd17bde8da5f0652e5f31341ce1f5b85}} 
+\index{SysLogger@{SysLogger}!SysLogger@{SysLogger}}
+\index{SysLogger@{SysLogger}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{SysLogger()}{SysLogger()}}
+{\footnotesize\ttfamily Sys\+Logger\+::\+Sys\+Logger (\begin{DoxyParamCaption}\item[{int}]{options = {\ttfamily LOG\+\_\+PID},  }\item[{int}]{facility = {\ttfamily LOG\+\_\+USER} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSysLogger_af0121ecb4f50cf05cf240bf5bb077333}\label{classSysLogger_af0121ecb4f50cf05cf240bf5bb077333}} 
+\index{SysLogger@{SysLogger}!````~SysLogger@{$\sim$SysLogger}}
+\index{````~SysLogger@{$\sim$SysLogger}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{$\sim$SysLogger()}{~SysLogger()}}
+{\footnotesize\ttfamily Sys\+Logger\+::$\sim$\+Sys\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSysLogger_a4546a14712282926bc4dc6d6a45c3d91}\label{classSysLogger_a4546a14712282926bc4dc6d6a45c3d91}} 
+\index{SysLogger@{SysLogger}!critical@{critical}}
+\index{critical@{critical}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{critical()}{critical()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+void Sys\+Logger\+::critical (\begin{DoxyParamCaption}\item[{format\+\_\+string$<$ Args... $>$}]{fmt,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSysLogger_a905bd3f762e443674881fd6a93ee6ac3}\label{classSysLogger_a905bd3f762e443674881fd6a93ee6ac3}} 
+\index{SysLogger@{SysLogger}!debug@{debug}}
+\index{debug@{debug}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{debug()}{debug()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+void Sys\+Logger\+::debug (\begin{DoxyParamCaption}\item[{format\+\_\+string$<$ Args... $>$}]{fmt,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSysLogger_a6f0467d292b9f262504c6bd119d8a87e}\label{classSysLogger_a6f0467d292b9f262504c6bd119d8a87e}} 
+\index{SysLogger@{SysLogger}!error@{error}}
+\index{error@{error}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{error()}{error()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+void Sys\+Logger\+::error (\begin{DoxyParamCaption}\item[{format\+\_\+string$<$ Args... $>$}]{fmt,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSysLogger_a93e920221bbb6a6eaf9ee99a3b7aeea7}\label{classSysLogger_a93e920221bbb6a6eaf9ee99a3b7aeea7}} 
+\index{SysLogger@{SysLogger}!info@{info}}
+\index{info@{info}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{info()}{info()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+void Sys\+Logger\+::info (\begin{DoxyParamCaption}\item[{format\+\_\+string$<$ Args... $>$}]{fmt,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSysLogger_a69c6b19d0dac53bbcec9696386457749}\label{classSysLogger_a69c6b19d0dac53bbcec9696386457749}} 
+\index{SysLogger@{SysLogger}!log@{log}}
+\index{log@{log}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily void Sys\+Logger\+::log (\begin{DoxyParamCaption}\item[{int}]{priority,  }\item[{const std\+::string \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSysLogger_a2dabf214f7b54c3016637f59b2b0f509}\label{classSysLogger_a2dabf214f7b54c3016637f59b2b0f509}} 
+\index{SysLogger@{SysLogger}!warning@{warning}}
+\index{warning@{warning}!SysLogger@{SysLogger}}
+\doxysubsubsection{\texorpdfstring{warning()}{warning()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+void Sys\+Logger\+::warning (\begin{DoxyParamCaption}\item[{format\+\_\+string$<$ Args... $>$}]{fmt,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{logger_8h}{logger.\+h}}\item 
+src/\mbox{\hyperlink{logger_8cpp}{logger.\+cpp}}\end{DoxyCompactItemize}

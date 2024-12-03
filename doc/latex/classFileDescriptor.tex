@@ -1,0 +1,65 @@
+\hypertarget{classFileDescriptor}{}\doxysection{File\+Descriptor Class Reference}
+\label{classFileDescriptor}\index{FileDescriptor@{FileDescriptor}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFileDescriptor_ae40e74b4ae333c2d05f0b0b8e9371070}{File\+Descriptor}} (int fd)
+\item 
+\mbox{\hyperlink{classFileDescriptor_aaf3da94e82c4a05406c6872a56701195}{$\sim$\+File\+Descriptor}} ()
+\item 
+int \mbox{\hyperlink{classFileDescriptor_a99db0a25a29cd6f9a3a79837919908f1}{get}} () const
+\item 
+\mbox{\hyperlink{classFileDescriptor_af0a9b528d1c65f0b4ea8eed55bac9ce8}{operator int}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classFileDescriptor_ac9c64ec16a46ed285f13347f9c074aab}{fd\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+RAII wrapper for file descriptors to ensure they\textquotesingle{}re properly closed This prevents resource leaks by automatically closing the file descriptor when the object goes out of scope 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFileDescriptor_ae40e74b4ae333c2d05f0b0b8e9371070}\label{classFileDescriptor_ae40e74b4ae333c2d05f0b0b8e9371070}} 
+\index{FileDescriptor@{FileDescriptor}!FileDescriptor@{FileDescriptor}}
+\index{FileDescriptor@{FileDescriptor}!FileDescriptor@{FileDescriptor}}
+\doxysubsubsection{\texorpdfstring{FileDescriptor()}{FileDescriptor()}}
+{\footnotesize\ttfamily File\+Descriptor\+::\+File\+Descriptor (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classFileDescriptor_aaf3da94e82c4a05406c6872a56701195}\label{classFileDescriptor_aaf3da94e82c4a05406c6872a56701195}} 
+\index{FileDescriptor@{FileDescriptor}!````~FileDescriptor@{$\sim$FileDescriptor}}
+\index{````~FileDescriptor@{$\sim$FileDescriptor}!FileDescriptor@{FileDescriptor}}
+\doxysubsubsection{\texorpdfstring{$\sim$FileDescriptor()}{~FileDescriptor()}}
+{\footnotesize\ttfamily File\+Descriptor\+::$\sim$\+File\+Descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFileDescriptor_a99db0a25a29cd6f9a3a79837919908f1}\label{classFileDescriptor_a99db0a25a29cd6f9a3a79837919908f1}} 
+\index{FileDescriptor@{FileDescriptor}!get@{get}}
+\index{get@{get}!FileDescriptor@{FileDescriptor}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily int File\+Descriptor\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classFileDescriptor_af0a9b528d1c65f0b4ea8eed55bac9ce8}\label{classFileDescriptor_af0a9b528d1c65f0b4ea8eed55bac9ce8}} 
+\index{FileDescriptor@{FileDescriptor}!operator int@{operator int}}
+\index{operator int@{operator int}!FileDescriptor@{FileDescriptor}}
+\doxysubsubsection{\texorpdfstring{operator int()}{operator int()}}
+{\footnotesize\ttfamily File\+Descriptor\+::operator int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classFileDescriptor_ac9c64ec16a46ed285f13347f9c074aab}\label{classFileDescriptor_ac9c64ec16a46ed285f13347f9c074aab}} 
+\index{FileDescriptor@{FileDescriptor}!fd\_@{fd\_}}
+\index{fd\_@{fd\_}!FileDescriptor@{FileDescriptor}}
+\doxysubsubsection{\texorpdfstring{fd\_}{fd\_}}
+{\footnotesize\ttfamily int File\+Descriptor\+::fd\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{splinterfs_8cpp}{splinterfs.\+cpp}}\end{DoxyCompactItemize}

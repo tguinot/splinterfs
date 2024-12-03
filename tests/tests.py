@@ -10,10 +10,10 @@ import hashlib
 import random
 import string
 
-SOURCE_FILE = "xxxxxx"
+SOURCE_FILE = "xxxxx"
 
 class FuseFilesystemTest(unittest.TestCase):
-    FUSE_PROGRAM = './build/splinterfs'  
+    FUSE_PROGRAM = '../build/splinterfs'  
     MOUNTPOINT = '/tmp/' + ''.join(random.choices(string.ascii_letters, k=8))
     SPLIT_SIZE = 100048576
     SOURCE_FILE = SOURCE_FILE
@@ -130,7 +130,7 @@ class FuseFilesystemTest(unittest.TestCase):
             os.stat(non_existent_file)
 
 class FuseFilesystemDynamicTest(unittest.TestCase):
-    FUSE_PROGRAM = './build/splinterfs'
+    FUSE_PROGRAM = '../build/splinterfs'
     SOURCE_FILE = SOURCE_FILE
     MOUNTPOINT = '/tmp/' + ''.join(random.choices(string.ascii_letters, k=8))
     SPLIT_SIZE = 100048576

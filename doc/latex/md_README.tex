@@ -1,0 +1,61 @@
+
+\begin{DoxyPre}
+░██████╗██████╗░██╗░░░░░██╗███╗░░██╗████████╗███████╗██████╗░░░░░░███████╗░██████╗
+██╔════╝██╔══██╗██║░░░░░██║████╗░██║╚══██╔══╝██╔════╝██╔══██╗░░░░░██╔════╝██╔════╝
+╚█████╗░██████╔╝██║░░░░░██║██╔██╗██║░░░██║░░░█████╗░░██████╔╝░░░░░█████╗░░╚█████╗░
+░╚═══██╗██╔═══╝░██║░░░░░██║██║╚████║░░░██║░░░██╔══╝░░██╔══██╗░░░░░██╔══╝░░░╚═══██╗
+██████╔╝██║░░░░░███████╗██║██║░╚███║░░░██║░░░███████╗██║░░██║░░░░░██║░░░░░██████╔╝
+╚═════╝░╚═╝░░░░░╚══════╝╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝░░░░░╚═╝░░░░░╚═════╝░
+\end{DoxyPre}
+
+
+Dead simple FUSE filesystem that splits large files into fixed-\/size chunks for easier handling. Shows files as pieces. Built using FUSE (Filesystem in Userspace), which lets you implement custom filesystems without kernel code.\hypertarget{md_README_autotoc_md0}{}\doxysubsection{Why?}\label{md_README_autotoc_md0}
+
+\begin{DoxyItemize}
+\item Break down huge files without actually splitting them
+\item Offers access to virtual chunks independently
+\item No actual file splitting/disk space wasted
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md1}{}\doxysubsection{Usage}\label{md_README_autotoc_md1}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./splinterfs big\_file.mp4 /mnt/chunks}
+
+\end{DoxyCode}
+
+
+Your 40GB video will show up as\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/mnt/chunks/0\_big\_file.mp4}
+\DoxyCodeLine{/mnt/chunks/1\_big\_file.mp4}
+\DoxyCodeLine{...}
+\DoxyCodeLine{/mnt/chunks/99\_big\_file.mp4}
+
+\end{DoxyCode}
+
+
+Each chunk appears as a read-\/only slice of the original file. Zero extra disk space needed -\/ it\textquotesingle{}s all virtual mapping.\hypertarget{md_README_autotoc_md2}{}\doxysubsection{Build}\label{md_README_autotoc_md2}
+Needs FUSE dev libs. On Ubuntu/\+Debian\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo apt-\/get install libfuse-\/dev}
+
+\end{DoxyCode}
+
+
+Requires {\ttfamily g++} 13 or above.
+
+To build\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git clone https://github.com/tguinot/splinterfs.git}
+\DoxyCodeLine{}
+\DoxyCodeLine{cd splinterfs}
+\DoxyCodeLine{mkdir build}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{}
+\DoxyCodeLine{cmake ..}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+
+
+Read-\/only, no fancy stuff. Just works™\hypertarget{md_README_autotoc_md3}{}\doxysubsection{How it works}\label{md_README_autotoc_md3}
+Maps file chunks on-\/the-\/fly using FUSE callbacks. When you read a chunk, split-\/fs calculates the offset in the original file and serves the data directly. No temporary files, no copies, just pure virtual files. 

@@ -1,0 +1,217 @@
+\hypertarget{splinterfs_8cpp}{}\doxysection{src/splinterfs.cpp File Reference}
+\label{splinterfs_8cpp}\index{src/splinterfs.cpp@{src/splinterfs.cpp}}
+{\ttfamily \#include $<$fuse.\+h$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$cerrno$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}config.\+h\char`\"{}}\newline
+Include dependency graph for splinterfs.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{splinterfs_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFileDescriptor}{File\+Descriptor}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{splinterfs_8cpp_a0919197af2e154da2c05727b6d87cbda}{FUSE\+\_\+\+USE\+\_\+\+VERSION}}~26
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{splinterfs_8cpp_a07424f86e1fa22086d4e3a962239804b}{parse\+\_\+split\+\_\+path}} (const char $\ast$path, int \&split\+\_\+num, std\+::string \&base\+\_\+filename)
+\item 
+static int \mbox{\hyperlink{splinterfs_8cpp_a6caf60410af27dff4dd2a4b5a1905180}{get\+\_\+attr}} (const char $\ast$path, struct stat $\ast$stbuf)
+\item 
+static int \mbox{\hyperlink{splinterfs_8cpp_a2bcf255de602508a3c59353373c403cf}{read\+\_\+dir}} (const char $\ast$path, void $\ast$buf, fuse\+\_\+fill\+\_\+dir\+\_\+t filler, off\+\_\+t offset, struct fuse\+\_\+file\+\_\+info $\ast$fi)
+\item 
+static int \mbox{\hyperlink{splinterfs_8cpp_ab9dc707491a6f650ba012ed852ff210e}{open\+\_\+file}} (const char $\ast$path, struct fuse\+\_\+file\+\_\+info $\ast$fi)
+\item 
+static int \mbox{\hyperlink{splinterfs_8cpp_a57d4f3ee578e0546fe429ab79f38db7d}{read\+\_\+file}} (const char $\ast$path, char $\ast$buf, size\+\_\+t size, off\+\_\+t offset, struct fuse\+\_\+file\+\_\+info $\ast$fi)
+\item 
+int \mbox{\hyperlink{splinterfs_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr size\+\_\+t \mbox{\hyperlink{splinterfs_8cpp_a8c8f77270c53e9649fe043f3b54f927b}{MAX\+\_\+\+FILENAME\+\_\+\+LEN}} = 256
+\item 
+static std\+::string \mbox{\hyperlink{splinterfs_8cpp_aca6704c333d40e18cadc10756ce4e3e8}{source\+\_\+path}}
+\item 
+static std\+::string \mbox{\hyperlink{splinterfs_8cpp_ac76cfddbff95b2b372aa7b18736c5e43}{mountpoint}}
+\item 
+\mbox{\hyperlink{classSysLogger}{Sys\+Logger}} \mbox{\hyperlink{splinterfs_8cpp_ab65996f90f2f8c377aae88d21852fdf6}{logger}}
+\item 
+static struct fuse\+\_\+operations \mbox{\hyperlink{splinterfs_8cpp_a913cb82f93b846e795e0dff644145878}{split\+\_\+file\+\_\+oper}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{splinterfs_8cpp_a0919197af2e154da2c05727b6d87cbda}\label{splinterfs_8cpp_a0919197af2e154da2c05727b6d87cbda}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!FUSE\_USE\_VERSION@{FUSE\_USE\_VERSION}}
+\index{FUSE\_USE\_VERSION@{FUSE\_USE\_VERSION}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{FUSE\_USE\_VERSION}{FUSE\_USE\_VERSION}}
+{\footnotesize\ttfamily \#define FUSE\+\_\+\+USE\+\_\+\+VERSION~26}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{splinterfs_8cpp_a6caf60410af27dff4dd2a4b5a1905180}\label{splinterfs_8cpp_a6caf60410af27dff4dd2a4b5a1905180}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!get\_attr@{get\_attr}}
+\index{get\_attr@{get\_attr}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_attr()}{get\_attr()}}
+{\footnotesize\ttfamily static int get\+\_\+attr (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{struct stat $\ast$}]{stbuf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+FUSE callback\+: Get attributes of a file or directory Similar to the \textquotesingle{}stat\textquotesingle{} system call
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the file/directory \\
+\hline
+{\em stbuf} & Buffer to store the attributes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/errno on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{splinterfs_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{splinterfs_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!main@{main}}
+\index{main@{main}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{splinterfs_8cpp_ab9dc707491a6f650ba012ed852ff210e}\label{splinterfs_8cpp_ab9dc707491a6f650ba012ed852ff210e}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!open\_file@{open\_file}}
+\index{open\_file@{open\_file}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{open\_file()}{open\_file()}}
+{\footnotesize\ttfamily static int open\+\_\+file (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{struct fuse\+\_\+file\+\_\+info $\ast$}]{fi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+FUSE callback\+: Open a file Checks if the file exists and if we have permission to access it
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the file \\
+\hline
+{\em fi} & File info structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/errno on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{splinterfs_8cpp_a07424f86e1fa22086d4e3a962239804b}\label{splinterfs_8cpp_a07424f86e1fa22086d4e3a962239804b}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!parse\_split\_path@{parse\_split\_path}}
+\index{parse\_split\_path@{parse\_split\_path}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{parse\_split\_path()}{parse\_split\_path()}}
+{\footnotesize\ttfamily bool parse\+\_\+split\+\_\+path (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{int \&}]{split\+\_\+num,  }\item[{std\+::string \&}]{base\+\_\+filename }\end{DoxyParamCaption})}
+
+Parses a path in the format \char`\"{}/$<$split\+\_\+number$>$\+\_\+$<$filename$>$\char`\"{}
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to parse \\
+\hline
+{\em split\+\_\+num} & Output parameter for the split number \\
+\hline
+{\em base\+\_\+filename} & Output parameter for the original filename \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if parsing successful, false otherwise
+\end{DoxyReturn}
+Example\+: \char`\"{}/0\+\_\+largefile.\+txt\char`\"{} -\/$>$ split\+\_\+num=0, base\+\_\+filename=\char`\"{}largefile.\+txt\char`\"{} \mbox{\Hypertarget{splinterfs_8cpp_a2bcf255de602508a3c59353373c403cf}\label{splinterfs_8cpp_a2bcf255de602508a3c59353373c403cf}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!read\_dir@{read\_dir}}
+\index{read\_dir@{read\_dir}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{read\_dir()}{read\_dir()}}
+{\footnotesize\ttfamily static int read\+\_\+dir (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{void $\ast$}]{buf,  }\item[{fuse\+\_\+fill\+\_\+dir\+\_\+t}]{filler,  }\item[{off\+\_\+t}]{offset,  }\item[{struct fuse\+\_\+file\+\_\+info $\ast$}]{fi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+FUSE callback\+: Read directory contents Similar to \textquotesingle{}readdir\textquotesingle{} system call
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Directory path \\
+\hline
+{\em buf} & Buffer to store directory entries \\
+\hline
+{\em filler} & Function to fill directory entries \\
+\hline
+{\em offset} & Offset in the directory (unused) \\
+\hline
+{\em fi} & File info (unused) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/errno on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{splinterfs_8cpp_a57d4f3ee578e0546fe429ab79f38db7d}\label{splinterfs_8cpp_a57d4f3ee578e0546fe429ab79f38db7d}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!read\_file@{read\_file}}
+\index{read\_file@{read\_file}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{read\_file()}{read\_file()}}
+{\footnotesize\ttfamily static int read\+\_\+file (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{char $\ast$}]{buf,  }\item[{size\+\_\+t}]{size,  }\item[{off\+\_\+t}]{offset,  }\item[{struct fuse\+\_\+file\+\_\+info $\ast$}]{fi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+FUSE callback\+: Read data from a file
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the file \\
+\hline
+{\em buf} & Buffer to store read data \\
+\hline
+{\em size} & Number of bytes to read \\
+\hline
+{\em offset} & Offset in the file to start reading from \\
+\hline
+{\em fi} & File info (unused) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of bytes read on success, -\/errno on failure 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{splinterfs_8cpp_ab65996f90f2f8c377aae88d21852fdf6}\label{splinterfs_8cpp_ab65996f90f2f8c377aae88d21852fdf6}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!logger@{logger}}
+\index{logger@{logger}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSysLogger}{Sys\+Logger}} logger}
+
+\mbox{\Hypertarget{splinterfs_8cpp_a8c8f77270c53e9649fe043f3b54f927b}\label{splinterfs_8cpp_a8c8f77270c53e9649fe043f3b54f927b}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!MAX\_FILENAME\_LEN@{MAX\_FILENAME\_LEN}}
+\index{MAX\_FILENAME\_LEN@{MAX\_FILENAME\_LEN}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_FILENAME\_LEN}{MAX\_FILENAME\_LEN}}
+{\footnotesize\ttfamily constexpr size\+\_\+t MAX\+\_\+\+FILENAME\+\_\+\+LEN = 256\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{splinterfs_8cpp_ac76cfddbff95b2b372aa7b18736c5e43}\label{splinterfs_8cpp_ac76cfddbff95b2b372aa7b18736c5e43}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!mountpoint@{mountpoint}}
+\index{mountpoint@{mountpoint}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{mountpoint}{mountpoint}}
+{\footnotesize\ttfamily std\+::string mountpoint\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{splinterfs_8cpp_aca6704c333d40e18cadc10756ce4e3e8}\label{splinterfs_8cpp_aca6704c333d40e18cadc10756ce4e3e8}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!source\_path@{source\_path}}
+\index{source\_path@{source\_path}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{source\_path}{source\_path}}
+{\footnotesize\ttfamily std\+::string source\+\_\+path\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{splinterfs_8cpp_a913cb82f93b846e795e0dff644145878}\label{splinterfs_8cpp_a913cb82f93b846e795e0dff644145878}} 
+\index{splinterfs.cpp@{splinterfs.cpp}!split\_file\_oper@{split\_file\_oper}}
+\index{split\_file\_oper@{split\_file\_oper}!splinterfs.cpp@{splinterfs.cpp}}
+\doxysubsubsection{\texorpdfstring{split\_file\_oper}{split\_file\_oper}}
+{\footnotesize\ttfamily struct fuse\+\_\+operations split\+\_\+file\+\_\+oper = \{\}\hspace{0.3cm}{\ttfamily [static]}}
+

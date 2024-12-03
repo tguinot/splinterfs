@@ -12,9 +12,10 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(FUSE REQUIRED fuse)
 
 # Create executable
-add_executable(splinterfs
-    splinterfs.cpp
-    logger.cpp
+add_executable(
+    splinterfs
+      src/splinterfs.cpp
+      src/logger.cpp
 )
 
 # Link against FUSE and add its include directories
